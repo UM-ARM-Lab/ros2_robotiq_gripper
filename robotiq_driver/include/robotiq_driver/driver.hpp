@@ -85,37 +85,47 @@ public:
    */
   virtual void deactivate() = 0;
 
-  /**
-   * @brief Commands the gripper to move to the desired position.
-   * @param pos A value between 0x00 (fully open) and 0xFF (fully closed).
-   */
-  virtual void set_gripper_position(uint8_t pos) = 0;
+  virtual uint8_t get_initialization_status() = 0; // also gets activation status
+  virtual uint8_t get_operation_mode_status() = 0;
+  virtual uint8_t get_action_status() = 0;
+  virtual uint8_t get_gripper_status() = 0;
+  virtual uint8_t get_motion_status() = 0;
+  virtual uint8_t get_finger_a_object_status() = 0;
+  virtual uint8_t get_finger_b_object_status() = 0;
+  virtual uint8_t get_finger_c_object_status() = 0;
+  virtual uint8_t get_scissor_object_status() = 0;
+  virtual uint8_t get_fault_status() = 0;
+  virtual uint8_t get_finger_a_commanded_position() = 0;
+  virtual uint8_t get_finger_a_position() = 0;
+  virtual uint8_t get_finger_a_current() = 0;
+  virtual uint8_t get_finger_b_commanded_position() = 0;
+  virtual uint8_t get_finger_b_position() = 0;
+  virtual uint8_t get_finger_b_current() = 0;
+  virtual uint8_t get_finger_c_commanded_position() = 0;
+  virtual uint8_t get_finger_c_position() = 0;
+  virtual uint8_t get_finger_c_current() = 0;
+  virtual uint8_t get_scissor_commanded_position() = 0;
+  virtual uint8_t get_scissor_position() = 0;
+  virtual uint8_t get_scissor_current() = 0;
 
-  /**
-   * @brief Return the current position of the gripper.
-   *
-   * @throw serial::IOException on failure to successfully communicate with gripper port
-   *
-   * @return uint8_t A value between 0x00 (fully open) and 0xFF (fully closed).
-   */
-  virtual uint8_t get_gripper_position() = 0;
+  virtual void set_activate(uint8_t activate) = 0; // akin to "initialization"
+  virtual void set_grasping_mode(uint8_t grasping_mode) = 0;
+  virtual void set_go_to(uint8_t go_to) = 0;
+  virtual void set_auto_release(uint8_t auto_release) = 0;
+  virtual void set_individual_finger_control(uint8_t individual_finger_control) = 0;
+  virtual void set_individual_scissor_control(uint8_t individual_scissor_control) = 0;
+  virtual void set_finger_a_position(uint8_t pos) = 0;
+  virtual void set_finger_a_speed(uint8_t speed) = 0;
+  virtual void set_finger_a_force(uint8_t force) = 0;
+  virtual void set_finger_b_position(uint8_t pos) = 0;
+  virtual void set_finger_b_speed(uint8_t speed) = 0;
+  virtual void set_finger_b_force(uint8_t force) = 0;
+  virtual void set_finger_c_position(uint8_t pos) = 0;
+  virtual void set_finger_c_speed(uint8_t speed) = 0;
+  virtual void set_finger_c_force(uint8_t force) = 0;
+  virtual void set_scissor_position(uint8_t pos) = 0;
+  virtual void set_scissor_speed(uint8_t speed) = 0;
+  virtual void set_scissor_force(uint8_t force) = 0;
 
-  /**
-   * @brief Returns true if the gripper is currently moving, false otherwise.
-   */
-  virtual bool gripper_is_moving() = 0;
-
-  /**
-   * @brief Set the speed of the gripper.
-   *
-   * @param speed A value between 0x00 (stopped) and 0xFF (full speed).
-   */
-  virtual void set_speed(uint8_t speed) = 0;
-
-  /**
-   * @brief Set how forcefully the gripper opens or closes.
-   * @param force A value between 0x00 (no force) or 0xFF (maximum force).
-   */
-  virtual void set_force(uint8_t force) = 0;
 };
 }  // namespace robotiq_driver
